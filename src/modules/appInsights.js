@@ -17,4 +17,4 @@ const client = () => {
     return appInsights.defaultClient;
 }
 
-module.exports = {enableAppInsights, client};
+module.exports = { enableAppInsights, client };

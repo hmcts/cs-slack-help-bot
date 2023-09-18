@@ -1,8 +1,8 @@
 const {WorkflowStep} = require("@slack/bolt");
-const {getAllServiceStatus} = require("../service/serviceStatus");
 const {getAllProducts} = require("../service/serviceStatus");
 const config = require("config");
 const reportChannelId = config.get('slack.report_channel_id');
+const Environment = require('../model/Environment');
 
 function getServiceStatusWorkflowStep() {
     return new WorkflowStep('get_service_status_step', {
@@ -26,7 +26,7 @@ function getServiceStatusWorkflowStep() {
             const blocks = [];
             const products = getAllProducts();
             const env = step.inputs.env.value;
-
+    
             blocks.push({
                 "type": "header",
                 "text": {
@@ -34,9 +34,16 @@ function getServiceStatusWorkflowStep() {
                     "text": "Common Services " + env.toUpperCase(),
                 }
             });
-        
+
             products.forEach(product => {
                 if (product.services[env].length > 0) {
+                    blocks.push({
+                        "type": "header",
+                        "text": {
+                            "type": "plain_text",
+                            "text": product.desc
+                        }
+                    });
                     blocks.push({
                         "type": "section",
                         "text": {
@@ -46,7 +53,7 @@ function getServiceStatusWorkflowStep() {
                     });
                 }
             });
-        
+
             blocks.push({ "type": "divider" });
             
             blocks.push({
@@ -54,6 +61,13 @@ function getServiceStatusWorkflowStep() {
                 "text": {
                     "type": "mrkdwn",
                     "text": `\n>This is up to date as of ${new Date().toLocaleString()} UTC \n`
+                }
+            });
+            blocks.push({
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Common Services " + env.toUpperCase(),
                 }
             });
 
@@ -110,7 +124,7 @@ function workflowStepBlocks(inputs) {
 							"text": "Production",
 							"emoji": true
 						},
-						"value": "prod"
+						"value": Environment.PROD
 					},
 					{
 						"text": {
@@ -118,7 +132,7 @@ function workflowStepBlocks(inputs) {
 							"text": "AAT",
 							"emoji": true
 						},
-						"value": "aat"
+						"value": Environment.AAT
 					},
 					{
 						"text": {
@@ -126,7 +140,7 @@ function workflowStepBlocks(inputs) {
 							"text": "Demo",
 							"emoji": true
 						},
-						"value": "demo"
+						"value": Environment.DEMO
 					},
 					{
 						"text": {
@@ -134,7 +148,7 @@ function workflowStepBlocks(inputs) {
 							"text": "Perftest",
 							"emoji": true
 						},
-						"value": "perftest"
+						"value": Environment.PERFTEST
 					},
 					{
 						"text": {
@@ -142,7 +156,7 @@ function workflowStepBlocks(inputs) {
 							"text": "ITHC",
 							"emoji": true
 						},
-						"value": "ithc"
+						"value": Environment.ITHC
 					}
 				],
 				"action_id": "env"
@@ -157,9 +171,9 @@ function workflowStepView(values) {
             value: values.user.user.selected_user
         },
         env: {
-            value: values.env.env.selected_option.value
+            value: values.env.env.selected_option
         }
     }
 }
 
-module.exports.getServiceStatusWorkflowStep = getServiceStatusWorkflowStep
+module.exports = { getServiceStatusWorkflowStep };
