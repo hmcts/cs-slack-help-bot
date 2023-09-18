@@ -67,10 +67,11 @@ function getServiceStatusWorkflowStep() {
             });
 
             console.log(JSON.stringify(blocks));
-            console.log(`publishing to channel ${reportChannelId}`);
+            const channel = step.inputs.channel.value;
+            console.log(`publishing to channel ${channel}`);
             try {
                 await client.chat.postEphemeral({
-                    channel: reportChannelId,
+                    channel: channel,
                     user: step.inputs.user.value,
                     username: 'Common Services Environments',
                     blocks: blocks,
@@ -96,6 +97,19 @@ function workflowStepBlocks(inputs) {
                 "type": "users_select",
                 "action_id": "user",
                 "initial_user": inputs?.user?.value ?? " ",
+            }
+        },
+        {
+            "type": "input",
+            "block_id": "channel",
+            "label": {
+                "type": "plain_text",
+                "text": "Channel"
+            },
+            "element": {
+                "type": "conversations_select",
+                "action_id": "channel",
+                "initial_conversation": inputs?.channel?.value ?? " ",
             }
         },
         {
@@ -164,6 +178,9 @@ function workflowStepView(values) {
     return {
         user: {
             value: values.user.user.selected_user
+        },
+        channel: {
+            value: values.channel.channel.selected_conversation
         },
         env: {
             value: values.env.env.selected_option
