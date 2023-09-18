@@ -10,7 +10,7 @@ const prodOverride = (env, prodUrl, defaultTemplateUrl) => {
     return env === Environment.PROD ? prodUrl : defaultTemplateUrl;
 }
 
-const refreshDelay = 30;
+const refreshDelay = 60;
 const products = [
     new Product("am", "Access Management", [
         new ServiceTemplate("am-judicial-booking-service", env => `http://am-judicial-booking-service-${env}.service.core-compute-${env}.internal`),

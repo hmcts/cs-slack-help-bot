@@ -1,4 +1,4 @@
-const refreshDelay = 30;
+const refreshDelay = 60;
 
 class Service {
     constructor(name, url, env) {
