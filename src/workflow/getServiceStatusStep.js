@@ -7,9 +7,11 @@ const Environment = require('../model/Environment');
 function getServiceStatusWorkflowStep() {
     return new WorkflowStep('get_service_status_step', {
         edit: async ({ ack, step, configure, client }) => {
+            console.log('edit workflow started');
             await ack();
 
             const blocks = workflowStepBlocks(step.inputs);
+            console.log(JSON.stringify(blocks));
             await configure({ blocks });
         },
         save: async ({ ack, step, view, update, client }) => {
