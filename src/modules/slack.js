@@ -29,6 +29,8 @@ const reopenAppHome = async (client, userId) => {
 
 const getSlackClient = () => app.client;
 
+const getReceiverClient = () => app.receiver.client;
+
 const addWorkflowStep = (step) => app.step(step);
 
-module.exports = { getSlackClient, addWorkflowStep };
+module.exports = { getSlackClient, addWorkflowStep, getReceiverClient };

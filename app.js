@@ -5,7 +5,7 @@ setupSecrets.setup();
 
 const {getServiceStatusWorkflowStep} = require("./src/workflow/getServiceStatusStep");
 const appInsights = require('./src/modules/appInsights')
-const {addWorkflowStep} = require("./src/modules/slack");
+const {addWorkflowStep, getReceiverClient} = require("./src/modules/slack");
 
 appInsights.enableAppInsights()
 
@@ -14,11 +14,12 @@ const port = process.env.PORT || 3000
 
 // Set up healthcheck page
 const server = http.createServer((req, res) => {
+    const slackReceiver = getReceiverClient();
     if (req.method !== 'GET') {
         res.statusCode = 405;
         res.end("error")
     } else if (req.url === '/health') {
-        const connectionError = app.receiver.client.badConnection;
+        const connectionError = slackReceiver.badConnection;
         if (connectionError) {
             res.statusCode = 500;
         } else {
@@ -37,7 +38,7 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify(myResponse))
     } else if (req.url === '/health/liveness') {
-        if (app.receiver.client.badConnection) {
+        if (slackReceiver.badConnection) {
             res.statusCode = 500
             res.end('Internal Server Error');
             return;
