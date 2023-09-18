@@ -27,7 +27,7 @@ function getServiceStatusWorkflowStep() {
         execute: async ({ step, complete, fail, client }) => {
             const blocks = [];
             const products = getAllProducts();
-            const env = step.inputs.env.value;
+            const env = step.inputs.env.value.value;
     
             blocks.push({
                 "type": "header",
@@ -65,16 +65,9 @@ function getServiceStatusWorkflowStep() {
                     "text": `\n>This is up to date as of ${new Date().toLocaleString()} UTC \n`
                 }
             });
-            blocks.push({
-                "type": "header",
-                "text": {
-                    "type": "plain_text",
-                    "text": "Common Services " + env.toUpperCase(),
-                }
-            });
 
             console.log(JSON.stringify(blocks));
-
+            console.log(`publishing to channel ${reportChannelId}`);
             try {
                 await client.chat.postEphemeral({
                     channel: reportChannelId,
