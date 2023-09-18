@@ -10,8 +10,8 @@ const setSecret = (secretPath, configPath) => {
 
 const setup = () => {
     if (config.has('secrets.cftptl-intsvc')) {
-        setSecret('secrets.cftptl-intsvc.xui-slack-bot-token', 'slack.bot_token');
-        setSecret('secrets.cftptl-intsvc.xui-slack-app-token', 'slack.app_token');
+        setSecret('secrets.cftptl-intsvc.cs-slack-bot-token', 'slack.bot_token');
+        setSecret('secrets.cftptl-intsvc.cs-slack-app-token', 'slack.app_token');
         setSecret('secrets.cftptl-intsvc.app-insights-instrumentation-key', 'app_insights.instrumentation_key');
     }
 };
