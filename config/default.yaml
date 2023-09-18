@@ -1,7 +1,6 @@
 slack:
   #bot_token: no default
   #app_token: no default
-  report_channel_id: C01KHKNJUKE
   product_internal_channel:
   product_support_channel:
 

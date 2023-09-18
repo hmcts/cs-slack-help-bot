@@ -1,7 +1,6 @@
 slack:
   bot_token: SLACK_BOT_TOKEN
   app_token: SLACK_APP_TOKEN
-  report_channel_id: SLACK_INTERNAL_CHANNEL
   product_internal_channel:
     am: SLACK_INTERNAL_CHANNEL
     ccd: SLACK_INTERNAL_CHANNEL

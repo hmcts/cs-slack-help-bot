@@ -1,7 +1,5 @@
 const {WorkflowStep} = require("@slack/bolt");
 const {getAllProducts} = require("../service/serviceStatus");
-const config = require("config");
-const reportChannelId = config.get('slack.report_channel_id');
 const Environment = require('../model/Environment');
 
 function getServiceStatusWorkflowStep() {
