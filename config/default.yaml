@@ -3,6 +3,10 @@ slack:
   #app_token: no default
   product_internal_channel:
   product_support_channel:
+  reporting:
+    after_failed_attempts: 10
+    start_hour: 8
+    end_hour: 17
 
 app_insights:
   #instrumentation_key: no default

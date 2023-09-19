@@ -3,6 +3,9 @@ const ServiceTemplate = require("../model/ServiceTemplate");
 const Product = require("../model/Product");
 const {getSlackClient} = require("../modules/slack");
 const Environment = require('../model/Environment');
+const config = require('config');
+
+const reportingAfterFailedAttempts = config.get('slack.reporting.after_failed_attempts');
 
 const slack = getSlackClient();
 
@@ -15,8 +18,8 @@ const products = [
     new Product("am", "Access Management", [
         new ServiceTemplate("am-judicial-booking-service", env => `http://am-judicial-booking-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("am-org-role-mapping-service", env => `http://am-org-role-mapping-service-${env}.service.core-compute-${env}.internal`),
-        new ServiceTemplate("am-role-assignment-service", env => `http://am-role-assignment-service-${env}.service.core-compute-${env}.internal`)
-    ]),
+        new ServiceTemplate("am-role-assignment-service", env => `http://am-role-assignment-service-${env}.service.core-compute-${env}.internal`),
+    ], false),
     new Product("ccd", "Core Case Data", [
         new ServiceTemplate("manage-case-assignment", env => `http://aac-manage-case-assignment-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("ccd-admin-web", env => prodOverride(env, `https://ccd-admin-web.platform.hmcts.net`, `https://ccd-admin-web.${env}.platform.hmcts.net`)),
@@ -31,10 +34,10 @@ const products = [
         new ServiceTemplate("ccd-user-profile-api", env => `http://ccd-user-profile-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("case-payment-orders-api", env => `http://cpo-case-payment-orders-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("ts-translation-service", env => `http://ts-translation-service-${env}.service.core-compute-${env}.internal`),
-    ]),
+    ], true),
     new Product("cui", "CUI Reasonable Adjustments", [
         new ServiceTemplate("cui-ra", env => `https://cui-ra.${env}.platform.hmcts.net`, [ Environment.AAT ]),
-    ]),
+    ], false),
     new Product("em", "Evidence Management", [
         new ServiceTemplate("dg-docassembly", env => `http://dg-docassembly-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("dm-store", env => `http://dm-store-${env}.service.core-compute-${env}.internal`),
@@ -43,7 +46,7 @@ const products = [
         new ServiceTemplate("em-hrs-api", env => `http://em-hrs-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("em-npa", env => `http://em-npa-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("em-stitching", env => `http://em-stitching-${env}.service.core-compute-${env}.internal`),
-    ]),
+    ], false),
     new Product("xui", "Expert UI", [
         new ServiceTemplate("xui-ao-webapp", env => prodOverride(env, `https://administer-orgs.platform.hmcts.net`, `https://administer-orgs.${env}.platform.hmcts.net`)),
         new ServiceTemplate("xui-mo-webapp", env => prodOverride(env, `https://manage-org.platform.hmcts.net`, `https://manage-org.${env}.platform.hmcts.net`)),
@@ -55,7 +58,7 @@ const products = [
         new ServiceTemplate("xui-webapp-integration1", () => `https://manage-case-int1.demo.platform.hmcts.net`, [ Environment.DEMO ]),
         new ServiceTemplate("xui-webapp-integration2", () => `https://manage-case-int2.demo.platform.hmcts.net`, [ Environment.DEMO ]),
         new ServiceTemplate("xui-webapp-wa-integration", () => `https://manage-case-wa-int.demo.platform.hmcts.net`, [ Environment.DEMO ]),
-    ]),
+    ], true),
     new Product("fees-pay", "Fee & Payments", [
         new ServiceTemplate("bar-api", env => `http://bar-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("bar-web", env => prodOverride(env, `https://manage-payments.platform.hmcts.net`, `https://bar.${env}.platform.hmcts.net`)),
@@ -68,31 +71,31 @@ const products = [
         new ServiceTemplate("ccpay-refunds-api", env => `http://ccpay-refunds-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("fees-register-api", env => `http://fees-register-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("fees-register-frontend", env => prodOverride(env, `https://fees-register.platform.hmcts.net`, `https://fees-register-api-${env}.service.core-compute-${env}.internal`)),
-    ]),
+    ], false),
     new Product("hmc", "Hearings Management Component", [
         new ServiceTemplate("hmc-cft-hearing-service", env => `http://hmc-cft-hearing-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("hmc-hmi-inbound-adapter", env => `http://hmc-hmi-inbound-adapter-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("hmc-hmi-outbound-adapter", env => `http://hmc-hmi-outbound-adapter-${env}.service.core-compute-${env}.internal`),
-    ]),
+    ], false),
     new Product("idam", "IDAM", [
         new ServiceTemplate("idam-api", env => prodOverride(env, `https://idam-api.platform.hmcts.net`, `https://idam-api.${env}.platform.hmcts.net`)),
         // new ServiceTemplate("idam-hmcts-access", env => `https://hmcts-access.${env}.platform.hmcts.net`),
         new ServiceTemplate("idam-user-dashboard", env => prodOverride(env, `https://idam-user-dashboard.platform.hmcts.net`, `https://idam-user-dashboard.${env}.platform.hmcts.net`)),
         // new ServiceTemplate("idam-web-admin", env => prodOverride(env, `https://idam-web-admin.platform.hmcts.net`, `https://idam-web-admin.${env}.platform.hmcts.net`)),
         new ServiceTemplate("idam-web-public", env => prodOverride(env, `https://hmcts-access.service.gov.uk`, `https://idam-web-public.${env}.platform.hmcts.net`)),
-    ]),
+    ], false),
     new Product("jps", "Judicial Payments Service", [
         // To be deployed
-    ]),
+    ], false),
     new Product("lau", "Log & Audit", [
         new ServiceTemplate("lau-case-backend", env => `http://lau-case-backend-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("lau-frontend", env => prodOverride(env, `https://log-and-audit.platform.hmcts.net`, `https://lau.${env}.platform.hmcts.net`)),
         new ServiceTemplate("lau-idam-backend", env => `http://lau-idam-backend-${env}.service.core-compute-${env}.internal`),
-    ]),
+    ], false),
     new Product("pcq", "Protected Characteristics Questionnaire", [
         new ServiceTemplate("pcq-backend", env => `http://pcq-backend-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("pcq-frontend", env => prodOverride(env, `https://equality-and-diversity.platform.hmcts.net`, `https://pcq.${env}.platform.hmcts.net`)),
-    ]),
+    ], false),
     new Product("rd", "Reference Data", [
         new ServiceTemplate("rd-caseworker-ref-api", env => `http://rd-caseworker-ref-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-commondata-api", env => `http://rd-commondata-api-${env}.service.core-compute-${env}.internal`),
@@ -101,19 +104,18 @@ const products = [
         new ServiceTemplate("rd-professional-api", env => `http://rd-professional-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-profile-sync", env => `http://rd-profile-sync-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-user-profile-api", env => `http://rd-user-profile-api-${env}.service.core-compute-${env}.internal`),
-    ]),
+    ], false),
     new Product("tm", "Task Management", [
         new ServiceTemplate("wa-case-event-handler-java", env => `http://wa-case-event-handler-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-task-management-api-java", env => `http://wa-task-management-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-task-monitor-java", env => `http://wa-task-monitor-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-workflow-api-java", env => `http://wa-workflow-api-${env}.service.core-compute-${env}.internal`),
-    ])
+    ], false)
 ];
 
 const getAllProducts = () => products;
 
 const monitorProductStatus = () => { 
-    // TODO: Only bother running reporting checks if current time is during expected cluster running hours
     products.forEach(product => {
         Object.entries(product.services).forEach(([env, services]) => {
             services.forEach(service => {
@@ -139,15 +141,15 @@ const monitorProductStatus = () => {
                     .then(data => {
                         if (data.status === 'UP') {
                             service.setLastSeen((Date.now()));
-                            if (service.reportedDown) {
-                                // postUpMessage(service, product);
+                            if (service.reportedDown && product.shouldReport()) {
+                                postUpMessage(service, product);
                             }
                         }
                     })
                     .catch((e) => {
                         service.failedChecks++;
-                        if (service.failedChecks >= 5 && !service.reportedDown) {
-                            // postDownMessage(service, product);
+                        if (service.failedChecks >= reportingAfterFailedAttempts && !service.reportedDown && product.shouldReport()) {
+                            postDownMessage(service, product);
                         }
                     });
             })

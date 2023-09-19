@@ -2,13 +2,17 @@ const Service = require("./Service");
 const config = require('config');
 const Environment = require('./Environment');
 
+const reportingStartHour = config.get('slack.reporting.start_hour');
+const reportingEndHour = config.get('slack.reporting.end_hour');
+
 class Product {
-    constructor(id, desc, serviceTemplates) {
+    constructor(id, desc, serviceTemplates, isReportingEnabled) {
         this.id = id;
         this.desc = desc;
         this.services = getServicesFromTemplates(serviceTemplates);
         this.internalChannel = getInternalChannel(id);
         this.supportChannel = getSupportChannel(id);
+        this.isReportingEnabled = isReportingEnabled;
     }
 
     getMarkdown(env) {
@@ -32,6 +36,16 @@ class Product {
         strings.push(`\n\n`);
 
         return strings.join('');
+    }
+
+    shouldReport() {
+        if (!this.isReportingEnabled) {
+            return false;
+        }
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentDay = now.getDay();
+        return (1 <= currentDay && currentDay <= 5) && (reportingStartHour <= currentHour && currentHour <= reportingEndHour); 
     }
 }
 
