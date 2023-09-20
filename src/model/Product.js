@@ -46,7 +46,7 @@ class Product {
         const now = new Date();
         const currentHour = now.getHours();
         const currentDay = now.getDay();
-        console.log(`current day ${currentDay}; current hour ${currentHour}; start hour ${reportingStartHour}; end hour ${reportingEndHour}`);
+        console.log(`current day ${currentDay} (${1 <= currentDay && currentDay <= 5}); current hour ${currentHour} (${reportingStartHour <= currentHour && currentHour <= reportingEndHour}); start hour ${reportingStartHour}; end hour ${reportingEndHour}`);
         return (1 <= currentDay && currentDay <= 5) && (reportingStartHour <= currentHour && currentHour <= reportingEndHour); 
     }
 }
