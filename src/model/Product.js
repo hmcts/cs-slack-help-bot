@@ -39,7 +39,7 @@ class Product {
     }
 
     shouldReport() {
-        console.log(`product ${product.name} - reporting enabled: ${this.isReportingEnabled}`);
+        console.log(`product ${this.id} - reporting enabled: ${this.isReportingEnabled}`);
         if (!this.isReportingEnabled) {
             return false;
         }
