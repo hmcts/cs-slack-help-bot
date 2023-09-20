@@ -189,6 +189,7 @@ const postUpMessage = async (service, product) => {
 const postDownMessage = async (service, product) => {
     let result = {};
     try {
+        console.log(`publishing down for ${service.url} to ${product.internalChannel}`);
         result = await slack.chat.postMessage({
             channel: product.internalChannel,
             text: `Service Down - ${service.url} in ${service.env.toUpperCase()}`,
