@@ -39,12 +39,14 @@ class Product {
     }
 
     shouldReport() {
+        console.log(`product ${product.name} - reporting enabled: ${this.isReportingEnabled}`);
         if (!this.isReportingEnabled) {
             return false;
         }
         const now = new Date();
         const currentHour = now.getHours();
         const currentDay = now.getDay();
+        console.log(`current day ${currentDay}; current hour ${currentHour}; start hour ${reportingStartHour}; end hour ${reportingEndHour}`);
         return (1 <= currentDay && currentDay <= 5) && (reportingStartHour <= currentHour && currentHour <= reportingEndHour); 
     }
 }

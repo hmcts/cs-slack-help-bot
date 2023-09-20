@@ -148,6 +148,7 @@ const monitorProductStatus = () => {
                     })
                     .catch((e) => {
                         service.failedChecks++;
+                        console.log(`service ${service.url} is down - checks: ${service.failedChecks}, reported already: ${service.reportedDown}`);
                         if (service.failedChecks >= reportingAfterFailedAttempts && !service.reportedDown && product.shouldReport()) {
                             postDownMessage(service, product);
                         }
