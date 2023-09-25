@@ -29,7 +29,9 @@ class Product {
         });
 
         strings.push(`:white_check_mark: *Services Up:* ${ticks.length == 0 ? 'None :crycat:' : ticks.map(service => service.getMarkdownLink()).join(', ')}\n\n`);
-        strings.push(`:x: *Services Down:* ${crosses.length == 0 ? 'None :tada:' : crosses.map(service => service.getMarkdownLink()).join(', ')}\n\n`);
+        if (crosses.length > 0) {
+            strings.push(`:x: *Services Down:* ${crosses.map(service => service.getMarkdownLink()).join(', ')}\n\n`);
+        }
         if (this.supportChannel) {
             strings.push(`:raising_hand: *Support Channel:* <#${this.supportChannel}>`);
         }
