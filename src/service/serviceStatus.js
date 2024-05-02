@@ -76,7 +76,7 @@ const products = [
         new ServiceTemplate("hmc-cft-hearing-service", env => `http://hmc-cft-hearing-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("hmc-hmi-inbound-adapter", env => `http://hmc-hmi-inbound-adapter-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("hmc-hmi-outbound-adapter", env => `http://hmc-hmi-outbound-adapter-${env}.service.core-compute-${env}.internal`),
-    ], false),
+    ], true),
     new Product("idam", "IDAM", [
         new ServiceTemplate("idam-api", env => prodOverride(env, `https://idam-api.platform.hmcts.net`, `https://idam-api.${env}.platform.hmcts.net`)),
         // new ServiceTemplate("idam-hmcts-access", env => `https://hmcts-access.${env}.platform.hmcts.net`),
