@@ -70,8 +70,8 @@ const products = [
         // new ServiceTemplate("ccpay-paymentoutcome-web", env => prodOverride(env, `https://paymentoutcome-web.platform.hmcts.net`, `https://paymentoutcome-web.${env}.platform.hmcts.net`)),
         new ServiceTemplate("ccpay-refunds-api", env => `http://ccpay-refunds-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("fees-register-api", env => `http://fees-register-api-${env}.service.core-compute-${env}.internal`),
-        new ServiceTemplate("fees-register-frontend", env => prodOverride(env, `https://fees-register.platform.hmcts.net`, `https://fees-register-api-${env}.service.core-compute-${env}.internal`)),
-    ], false),
+        new ServiceTemplate("fees-register-frontend", env => prodOverride(env, `https://fees-register.platform.hmcts.net`, `http://fees-register-api-${env}.service.core-compute-${env}.internal`)),
+    ], true),
     new Product("hmc", "Hearings Management Component", [
         new ServiceTemplate("hmc-cft-hearing-service", env => `http://hmc-cft-hearing-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("hmc-hmi-inbound-adapter", env => `http://hmc-hmi-inbound-adapter-${env}.service.core-compute-${env}.internal`),
