@@ -104,7 +104,7 @@ const products = [
         new ServiceTemplate("rd-professional-api", env => `http://rd-professional-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-profile-sync", env => `http://rd-profile-sync-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-user-profile-api", env => `http://rd-user-profile-api-${env}.service.core-compute-${env}.internal`),
-    ], false),
+    ], true),
     new Product("tm", "Task Management", [
         new ServiceTemplate("wa-case-event-handler-java", env => `http://wa-case-event-handler-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-task-management-api-java", env => `http://wa-task-management-api-${env}.service.core-compute-${env}.internal`),
