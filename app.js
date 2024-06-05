@@ -6,7 +6,7 @@ setupSecrets.setup();
 const {getServiceStatusWorkflowStep} = require("./src/workflow/getServiceStatusStep");
 const appInsights = require('./src/modules/appInsights')
 const {addWorkflowStep, getReceiverClient} = require("./src/modules/slack");
-const {getAllProducts} = require("../service/serviceStatus");
+const {getAllProducts} = require("./src/service/serviceStatus");
 
 appInsights.enableAppInsights()
 
