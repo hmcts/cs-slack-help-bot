@@ -6,6 +6,7 @@ setupSecrets.setup();
 const {getServiceStatusWorkflowStep} = require("./src/workflow/getServiceStatusStep");
 const appInsights = require('./src/modules/appInsights')
 const {addWorkflowStep, getReceiverClient} = require("./src/modules/slack");
+const {getAllProducts} = require("../service/serviceStatus");
 
 appInsights.enableAppInsights()
 
@@ -50,6 +51,9 @@ const server = http.createServer((req, res) => {
         // Dummy error page
         res.statusCode = 500;
         res.end(`{"error": "${http.STATUS_CODES[500]}"}`)
+    } else if (req.url === '/api/products') {
+        res.setHeader('Content-Type', 'application/json')
+        res.end(JSON.stringify(getAllProducts()))
     } else {
         res.statusCode = 404;
         res.end(`{"error": "${http.STATUS_CODES[404]}"}`)
