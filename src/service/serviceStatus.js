@@ -137,6 +137,7 @@ const monitorProductStatus = () => {
                 })
                     .then(data => {
                         if (data.status === 'UP') {
+                            service.failedChecks = 0;
                             service.setLastSeen((Date.now()));
                             if (service.reportedDown && product.shouldReport()) {
                                 postUpMessage(service, product);
@@ -145,7 +146,7 @@ const monitorProductStatus = () => {
                     })
                     .catch((e) => {
                         service.failedChecks++;
-                        console.log(`service ${service.url} is down - checks: ${service.failedChecks}, reported already: ${service.reportedDown}`);
+                        console.log(`service ${service.url} is down - checks: ${service.failedChecks}, reported already: ${service.reportedDown}, error: ${e}`);
                         if (service.failedChecks >= reportingAfterFailedAttempts && !service.reportedDown && product.shouldReport()) {
                             postDownMessage(service, product);
                         }
