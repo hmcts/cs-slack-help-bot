@@ -137,7 +137,7 @@ const monitorProductStatus = () => {
                 })
                     .then(data => {
                         if (data.status === 'UP') {
-                            service.failedChecks = 0;
+                            service.resetReportedDown();
                             service.setLastSeen((Date.now()));
                             if (service.reportedDown && product.shouldReport()) {
                                 postUpMessage(service, product);
