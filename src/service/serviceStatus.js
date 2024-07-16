@@ -142,6 +142,8 @@ const monitorProductStatus = () => {
                             if (service.reportedDown && product.shouldReport()) {
                                 postUpMessage(service, product);
                             }
+                        } else {
+                            console.log(`service ${service.url} is not reporting UP - data: ${data}`);
                         }
                     })
                     .catch((e) => {
