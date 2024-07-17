@@ -137,11 +137,11 @@ const monitorProductStatus = () => {
                 })
                     .then(data => {
                         if (data.status === 'UP') {
-                            service.resetReportedDown();
                             service.setLastSeen((Date.now()));
                             if (service.reportedDown && product.shouldReport()) {
                                 postUpMessage(service, product);
                             }
+                            service.resetReportedDown();
                         } else {
                             console.log(`service ${service.url} is not reporting UP - data: ${data}`);
                         }
