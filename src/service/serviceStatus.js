@@ -99,7 +99,6 @@ const products = [
         new ServiceTemplate("rd-judicial-api", env => `http://rd-judicial-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-location-ref-api", env => `http://rd-location-ref-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-professional-api", env => `http://rd-professional-api-${env}.service.core-compute-${env}.internal`),
-        new ServiceTemplate("rd-profile-sync", env => `http://rd-profile-sync-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-user-profile-api", env => `http://rd-user-profile-api-${env}.service.core-compute-${env}.internal`),
     ], true),
     new Product("tm", "Task Management", [
