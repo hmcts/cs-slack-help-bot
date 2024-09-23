@@ -19,7 +19,7 @@ const products = [
         new ServiceTemplate("am-judicial-booking-service", env => `http://am-judicial-booking-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("am-org-role-mapping-service", env => `http://am-org-role-mapping-service-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("am-role-assignment-service", env => `http://am-role-assignment-service-${env}.service.core-compute-${env}.internal`),
-    ], false),
+    ], true),
     new Product("ccd", "Core Case Data", [
         new ServiceTemplate("manage-case-assignment", env => `http://aac-manage-case-assignment-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("ccd-admin-web", env => prodOverride(env, `https://ccd-admin-web.platform.hmcts.net`, `https://ccd-admin-web.${env}.platform.hmcts.net`)),
