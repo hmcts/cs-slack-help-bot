@@ -81,9 +81,9 @@ const products = [
         new ServiceTemplate("idam-api", env => prodOverride(env, `https://idam-api.platform.hmcts.net`, `https://idam-api.${env}.platform.hmcts.net`)),
         // new ServiceTemplate("idam-hmcts-access", env => `https://hmcts-access.${env}.platform.hmcts.net`),
         new ServiceTemplate("idam-user-dashboard", env => prodOverride(env, `https://idam-user-dashboard.platform.hmcts.net`, `https://idam-user-dashboard.${env}.platform.hmcts.net`)),
-        // new ServiceTemplate("idam-web-admin", env => prodOverride(env, `https://idam-web-admin.platform.hmcts.net`, `https://idam-web-admin.${env}.platform.hmcts.net`)),
+        new ServiceTemplate("idam-user-profile-bridge", env => prodOverride(env, `https://idam-user-profile-bridge.platform.hmcts.net`, `https://idam-user-profile-bridge.${env}.platform.hmcts.net`)),
         new ServiceTemplate("idam-web-public", env => prodOverride(env, `https://hmcts-access.service.gov.uk`, `https://idam-web-public.${env}.platform.hmcts.net`)),
-    ], false),
+    ], true),
     new Product("lau", "Log & Audit", [
         new ServiceTemplate("lau-case-backend", env => `http://lau-case-backend-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("lau-frontend", env => prodOverride(env, `https://log-and-audit.platform.hmcts.net`, `https://lau.${env}.platform.hmcts.net`)),
