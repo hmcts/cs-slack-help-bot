@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@hmcts/properties-volume": "^1.0.0",
-    "@slack/bolt": "^3.13.3",
+    "@slack/bolt": "^4.0.0",
     "applicationinsights": "^3.0.0",
     "config": "^3.3.9",
     "lodash": "^4.17.21",
