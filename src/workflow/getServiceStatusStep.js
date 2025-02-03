@@ -23,6 +23,7 @@ function getServiceStatusWorkflowStep() {
             await update({ inputs, outputs });
         },
         execute: async ({ step, complete, fail, client }) => {
+            console.log('executed step', JSON.stringify(step));
             const blocks = [];
             const products = getAllProducts();
             const env = step.inputs.env.value.value;
