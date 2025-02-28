@@ -60,8 +60,8 @@ const products = [
         new ServiceTemplate("xui-webapp-wa-integration", () => `https://manage-case-wa-int.demo.platform.hmcts.net`, [ Environment.DEMO ]),
     ], true),
     new Product("fees-pay", "Fee & Payments", [
-        new ServiceTemplate("bar-api", env => `http://bar-api-${env}.service.core-compute-${env}.internal`, [ Environment.PROD, Environment.AAT, Environment.PERFTEST ]),
-        new ServiceTemplate("bar-web", env => prodOverride(env, `https://manage-payments.platform.hmcts.net`, `https://bar.${env}.platform.hmcts.net`), [ Environment.PROD, Environment.AAT, Environment.PERFTEST ]),
+        new ServiceTemplate("bar-api", env => `http://bar-api-${env}.service.core-compute-${env}.internal`, [ Environment.PROD ]),
+        new ServiceTemplate("bar-web", env => prodOverride(env, `https://manage-payments.platform.hmcts.net`, `https://bar.${env}.platform.hmcts.net`), [ Environment.PROD ]),
         new ServiceTemplate("ccpay-bubble-frontend", env => prodOverride(env, `https://paybubble.platform.hmcts.net`, `https://paybubble.${env}.platform.hmcts.net`)),
         new ServiceTemplate("ccpay-bulkscanning-api", env => `http://ccpay-bulkscanning-api-${env}.service.core-compute-${env}.internal`),
         // new ServiceTemplate("ccpay-cpo-update-service", env => `http://ccpay-cpo-update-service-${env}.service.core-compute-${env}.internal`),
