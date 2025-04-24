@@ -64,4 +64,4 @@ server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
-addWorkflowStep('get_service_status_step', getServiceStatusWorkflowStep());
+addWorkflowStep('get_service_status_step', getServiceStatusWorkflowStep);
