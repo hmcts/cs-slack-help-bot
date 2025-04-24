@@ -2,7 +2,7 @@ const {WorkflowStep} = require("@slack/bolt");
 const {getAllProducts} = require("../service/serviceStatus");
 const Environment = require('../model/Environment');
 
-async function getServiceStatusWorkflowStep({ client, inputs, fail }) {
+const getServiceStatusWorkflowStep = async ({ client, inputs, fail }) => {
     console.log('executed step with inputs', JSON.stringify(inputs));
     const blocks = [];
     const products = getAllProducts();
