@@ -31,6 +31,6 @@ const getSlackClient = () => app.client;
 
 const getReceiverClient = () => app.receiver.client;
 
-const addWorkflowStep = (step) => app.step(step);
+const addWorkflowStep = (callbackId, fn) => app.function(callbackId, fn);
 
 module.exports = { getSlackClient, addWorkflowStep, getReceiverClient };
