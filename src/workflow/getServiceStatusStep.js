@@ -8,7 +8,7 @@ const getServiceStatusWorkflowStep = async ({ client, inputs, fail }) => {
         const blocks = [];
         const products = getAllProducts();
         
-        const env = inputs.env.value.value;
+        const env = inputs.env;
 
         blocks.push({
             "type": "header",
@@ -48,11 +48,11 @@ const getServiceStatusWorkflowStep = async ({ client, inputs, fail }) => {
         });
 
         console.log(JSON.stringify(blocks));
-        const channel = inputs.channel.value;
+        const channel = inputs.channel;
         console.log(`publishing to channel ${channel}`);
         await client.chat.postEphemeral({
             channel: channel,
-            user: inputs.user.value,
+            user: inputs.user,
             username: 'Common Services Environments',
             blocks: blocks,
             text: 'Service status'
