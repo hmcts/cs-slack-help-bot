@@ -20,7 +20,7 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
             }
         });
 
-        results.forEach((value, key) => {
+        stats.forEach((value, key) => {
             blocks.push({
                 "type": "section",
                 "text": {
