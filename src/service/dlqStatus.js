@@ -18,4 +18,9 @@ async function getDlqStats() {
     return results;
 }
 
-module.exports = { getDlqStats };
+async function getDlqCount() {
+    const dlqCount = await getIndexCount(DLQ_INDEX);
+    return dlqCount;
+}
+
+module.exports = { getDlqStats, getDlqCount };

@@ -1,4 +1,4 @@
-const {getDlqStats} = require('../service/dlqStatus');
+const {getDlqStats, getDlqCount} = require('../service/dlqStatus');
 
 const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
     try {
@@ -11,6 +11,8 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
         });
         const totalDlq = Array.from(stats.values()).reduce((acc, val) => acc + val, 0);
         console.log(`Total DLQ messages: ${totalDlq}`);
+
+        const dlqCount = await getDlqCount();
 
         blocks.push({
             "type": "header",
@@ -28,6 +30,16 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
                     "text": `Case type ${key} has ${value} DLQ messages`
                 }
             });
+        });
+
+        blocks.push({ "type": "divider" });
+        
+        blocks.push({
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": `\n>Total DLQ size: ${dlqCount}\n`
+            }
         });
 
         console.log(JSON.stringify(blocks));
