@@ -34,7 +34,7 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
 function createDlqSlackBlocks(resultsMap, dlqCount) {
     const now = new Date().toLocaleString();
   
-    const headerLine = '`Case Type             | Count`';
+    const headerLine = '`Case Type                |   Count`';
     const dividerLine = `\`${'-'.repeat(25)}|${'-'.repeat(8)}\``;
   
     const lines = [...resultsMap.entries()].map(([caseType, count]) => {
