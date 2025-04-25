@@ -1,4 +1,3 @@
-const c = require('config');
 const {getDlqStats, getDlqCount} = require('../service/dlqStatus');
 
 const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
@@ -38,7 +37,7 @@ function createDlqSlackBlocks(resultsMap, dlqCount) {
     const headerLine = '`Case Type             | Count`';
     const dividerLine = '`----------------------|------`';
   
-    const lines = resultsMap.map(([caseType, count]) => {
+    const lines = [...resultsMap.entries()].map(([caseType, count]) => {
       const paddedType = caseType.padEnd(22);
       const paddedCount = String(count).padStart(5);
       return `\`${paddedType}| ${paddedCount}\``;
