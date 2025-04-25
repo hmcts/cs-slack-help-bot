@@ -1,9 +1,9 @@
+const c = require('config');
 const {getDlqStats, getDlqCount} = require('../service/dlqStatus');
 
 const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
     try {
         console.log('executed step with inputs', JSON.stringify(inputs));
-        const blocks = [];
 
         const stats = await getDlqStats();
         stats.forEach((value, key) => {
@@ -14,33 +14,7 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
 
         const dlqCount = await getDlqCount();
 
-        blocks.push({
-            "type": "header",
-            "text": {
-                "type": "plain_text",
-                "text": "DLQ Status",
-            }
-        });
-
-        stats.forEach((value, key) => {
-            blocks.push({
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": `Case type \`${key}\` has \`${value}\` DLQ messages`
-                }
-            });
-        });
-
-        blocks.push({ "type": "divider" });
-        
-        blocks.push({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": `\n>Total DLQ size: \`${dlqCount}\`\n`
-            }
-        });
+        const blocks = createDlqSlackBlocks(stats, dlqCount);
 
         console.log(JSON.stringify(blocks));
         const channel = inputs.channel;
@@ -50,12 +24,77 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
             user: inputs.user,
             username: 'Elasticsearch DLQ Status',
             blocks: blocks,
-            text: 'DLQ Status'
+            text: ':rotating_light: DLQ Status'
         });
     } catch (error) {
         console.error(error);
         fail({ error: `Failed to handle function request: ${error}` });
     }
 };
+
+function createDlqSlackBlocks(resultsMap, dlqCount) {
+    const now = new Date().toLocaleString();
+  
+    const headerLine = '`Case Type             | Count`';
+    const dividerLine = '`----------------------|------`';
+  
+    const lines = resultsMap.map(([caseType, count]) => {
+      const paddedType = caseType.padEnd(22);
+      const paddedCount = String(count).padStart(5);
+      return `\`${paddedType}| ${paddedCount}\``;
+    });
+  
+    const blocks = [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: ':clipboard: Dead Letter Queue Status',
+          emoji: true
+        }
+      },
+      {
+        type: 'context',
+        elements: [
+          {
+            type: 'mrkdwn',
+            text: `Generated: ${now}`
+          }
+        ]
+      },
+      {
+        type: 'divider'
+      }
+    ];
+  
+    if (lines.length === 0) {
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: ':white_check_mark: No DLQ messages found. All clear!'
+        }
+      });
+    } else {
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: [headerLine, dividerLine, ...lines].join('\n')
+        }
+      });
+    }
+
+    blocks.push({ "type": "divider" });
+    blocks.push({
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": `\n>Total DLQ size: \`${dlqCount}\`\n`
+        }
+    });
+  
+    return blocks;
+}
 
 module.exports = { getDlqStatusWorkflowStep };
