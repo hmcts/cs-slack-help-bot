@@ -43,7 +43,7 @@ function createDlqSlackBlocks(resultsMap, dlqCount) {
       return `\`${paddedType}| ${paddedCount}\``;
     });
 
-    const totalLine = `\`${'Total'.padEnd(25)}| ${String(total).padStart(7)}\``;
+    const totalLine = `\`${'Total'.padEnd(25)}| ${String(dlqCount).padStart(7)}\``;
   
     const blocks = [
       {
