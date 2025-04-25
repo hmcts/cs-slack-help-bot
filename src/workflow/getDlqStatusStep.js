@@ -34,16 +34,18 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
 function createDlqSlackBlocks(resultsMap, dlqCount) {
     const now = new Date().toLocaleString();
   
-    const headerLine = '`Case Type                |   Count`';
-    const dividerLine = `\`${'-'.repeat(25)}|${'-'.repeat(8)}\``;
+    const paddingEnd = 25;
+    const paddingStart = 8;
+    const headerLine = `\`${'Case Type'.padEnd(paddingEnd)}|${'Count'.padStart(paddingStart)}\``;
+    const dividerLine = `\`${'-'.repeat(paddingEnd)}|${'-'.repeat(8)}\``;
   
     const lines = [...resultsMap.entries()].map(([caseType, count]) => {
-      const paddedType = caseType.padEnd(25);
-      const paddedCount = String(count).padStart(7);
-      return `\`${paddedType}| ${paddedCount}\``;
+      const paddedType = caseType.padEnd(paddingEnd);
+      const paddedCount = String(count).padStart(paddingStart);
+      return `\`${paddedType}|${paddedCount}\``;
     });
 
-    const totalLine = `\`${'Total'.padEnd(25)}| ${String(dlqCount).padStart(7)}\``;
+    const totalLine = `\`${'Total'.padEnd(paddingEnd)}|${String(dlqCount).padStart(paddingStart)}\``;
   
     const blocks = [
       {
