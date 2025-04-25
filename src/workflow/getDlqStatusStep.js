@@ -27,7 +27,7 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `Case type ${key} has ${value} DLQ messages`
+                    "text": `Case type \`${key}\` has \`${value}\` DLQ messages`
                 }
             });
         });
@@ -38,7 +38,7 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": `\n>Total DLQ size: ${dlqCount}\n`
+                "text": `\n>Total DLQ size: \`${dlqCount}\`\n`
             }
         });
 
