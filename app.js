@@ -4,6 +4,7 @@ const setupSecrets = require('./src/setupSecrets');
 setupSecrets.setup();
 
 const {getServiceStatusWorkflowStep} = require("./src/workflow/getServiceStatusStep");
+const {getDlqStatusWorkflowStep} = require('./src/workflow/getDlqStatusStep');
 const appInsights = require('./src/modules/appInsights')
 const {addWorkflowStep, getReceiverClient} = require("./src/modules/slack");
 const {getAllProducts} = require("./src/service/serviceStatus");
@@ -11,7 +12,7 @@ const {getAllProducts} = require("./src/service/serviceStatus");
 appInsights.enableAppInsights()
 
 const http = require('http');
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 // Set up healthcheck page
 const server = http.createServer((req, res) => {
@@ -65,3 +66,4 @@ server.listen(port, () => {
 });
 
 addWorkflowStep('get_service_status_step', getServiceStatusWorkflowStep);
+addWorkflowStep('get_dlq_status_step', getDlqStatusWorkflowStep);

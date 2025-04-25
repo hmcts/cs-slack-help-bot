@@ -28,5 +28,8 @@ slack:
     rd: SLACK_SUPPORT_CHANNEL_RD
     tm: SLACK_SUPPORT_CHANNEL_TM
 
+elastic:
+  url: ELASTIC_URL
+
 app_insights:
   instrumentation_key: APP_INSIGHTS_INSTRUMENTATION_KEY

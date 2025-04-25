@@ -8,6 +8,9 @@ slack:
     start_hour: 8
     end_hour: 17
 
+elastic:
+  url: http://localhost:9200
+
 app_insights:
   #instrumentation_key: no default
   role_name: cs-slack-help-bot

@@ -13,6 +13,7 @@ const setup = () => {
         setSecret('secrets.cftptl-intsvc.cs-slack-bot-token', 'slack.bot_token');
         setSecret('secrets.cftptl-intsvc.cs-slack-app-token', 'slack.app_token');
         setSecret('secrets.cftptl-intsvc.app-insights-instrumentation-key', 'app_insights.instrumentation_key');
+        setSecret('secrets.cftptl-intsvc.cs-elastic-url', 'elastic.url');
     }
 };
 
