@@ -6,10 +6,10 @@ const getDlqStatusWorkflowStep = async ({ client, inputs, fail }) => {
         const blocks = [];
 
         const stats = await getDlqStats();
-        results.forEach((value, key) => {
+        stats.forEach((value, key) => {
             console.log(`Case type ${key} has ${value} DLQ messages`);
         });
-        const totalDlq = Array.from(results.values()).reduce((acc, val) => acc + val, 0);
+        const totalDlq = Array.from(stats.values()).reduce((acc, val) => acc + val, 0);
         console.log(`Total DLQ messages: ${totalDlq}`);
 
         blocks.push({
