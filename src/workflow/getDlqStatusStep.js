@@ -35,13 +35,15 @@ function createDlqSlackBlocks(resultsMap, dlqCount) {
     const now = new Date().toLocaleString();
   
     const headerLine = '`Case Type             | Count`';
-    const dividerLine = '`----------------------|------`';
+    const dividerLine = `\`${'-'.repeat(25)}|${'-'.repeat(8)}\``;
   
     const lines = [...resultsMap.entries()].map(([caseType, count]) => {
-      const paddedType = caseType.padEnd(22);
-      const paddedCount = String(count).padStart(5);
+      const paddedType = caseType.padEnd(25);
+      const paddedCount = String(count).padStart(7);
       return `\`${paddedType}| ${paddedCount}\``;
     });
+
+    const totalLine = `\`${'Total'.padEnd(25)}| ${String(total).padStart(7)}\``;
   
     const blocks = [
       {
@@ -79,19 +81,10 @@ function createDlqSlackBlocks(resultsMap, dlqCount) {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: [headerLine, dividerLine, ...lines].join('\n')
+          text: [headerLine, dividerLine, ...lines, dividerLine, totalLine].join('\n')
         }
       });
     }
-
-    blocks.push({ "type": "divider" });
-    blocks.push({
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": `\n>Total DLQ size: \`${dlqCount}\`\n`
-        }
-    });
   
     return blocks;
 }
