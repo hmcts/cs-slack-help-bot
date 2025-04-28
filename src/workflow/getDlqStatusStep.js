@@ -37,7 +37,7 @@ function createDlqSlackBlocks(resultsMap, dlqCount) {
     const paddingEnd = 25;
     const paddingStart = 8;
     const headerLine = `\`${'Case Type'.padEnd(paddingEnd)}|${'Count'.padStart(paddingStart)}\``;
-    const dividerLine = `\`${'-'.repeat(paddingEnd)}|${'-'.repeat(8)}\``;
+    const dividerLine = `\`${'-'.repeat(paddingEnd)}|${'-'.repeat(paddingStart)}\``;
   
     const lines = [...resultsMap.entries()].map(([caseType, count]) => {
       const paddedType = caseType.padEnd(paddingEnd);
