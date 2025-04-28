@@ -8,6 +8,7 @@ const {getDlqStatusWorkflowStep} = require('./src/workflow/getDlqStatusStep');
 const appInsights = require('./src/modules/appInsights')
 const {addWorkflowStep, getReceiverClient} = require("./src/modules/slack");
 const {getAllProducts} = require("./src/service/serviceStatus");
+const cron = require('node-cron');
 
 appInsights.enableAppInsights()
 
@@ -67,3 +68,8 @@ server.listen(port, () => {
 
 addWorkflowStep('get_service_status_step', getServiceStatusWorkflowStep);
 addWorkflowStep('get_dlq_status_step', getDlqStatusWorkflowStep);
+
+cron.schedule('0 16 * * *', async () => {
+    console.log('Scheduled task');
+    // TODO
+});
