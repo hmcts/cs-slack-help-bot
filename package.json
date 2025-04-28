@@ -11,7 +11,7 @@
   "author": "Common Services",
   "license": "MIT",
   "dependencies": {
-    "@elastic/elasticsearch": "^7.17.14",
+    "@elastic/elasticsearch": "^9.0.0",
     "@hmcts/properties-volume": "^1.0.0",
     "@slack/bolt": "^4.0.0",
     "applicationinsights": "^3.0.0",
