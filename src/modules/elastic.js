@@ -8,9 +8,9 @@ const client = new Client({
 })
 
 async function getCaseTypes() {
-    const { body } = await client.cat.indices({ format: 'json' })
-    console.log(body);
-    return body.map(index => index.index.replace('_cases-000001', ''));
+    const response = await client.cat.indices({ format: 'json' })
+    console.log(response);
+    return response.body.map(index => index.index.replace('_cases-000001', ''));
 }
 
 async function searchDlq(index) {
