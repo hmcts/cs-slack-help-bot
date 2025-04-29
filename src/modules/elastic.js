@@ -9,6 +9,7 @@ const client = new Client({
 
 async function getCaseTypes() {
     const { body } = await client.cat.indices({ format: 'json' })
+    console.log(body);
     return body.map(index => index.index.replace('_cases-000001', ''));
 }
 
