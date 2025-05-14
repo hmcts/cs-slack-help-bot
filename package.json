@@ -17,7 +17,7 @@
     "applicationinsights": "^3.0.0",
     "config": "^3.3.9",
     "lodash": "^4.17.21",
-    "node-cron": "^3.0.3",
+    "node-cron": "^4.0.0",
     "node-fetch-retry": "^2.0.1"
   },
   "devDependencies": {
