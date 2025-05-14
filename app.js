@@ -69,7 +69,7 @@ server.listen(port, () => {
 addWorkflowStep('get_service_status_step', getServiceStatusWorkflowStep);
 addWorkflowStep('get_dlq_status_step', getDlqStatusWorkflowStep);
 
-cron.schedule('0 16 * * *', async () => {
+cron.schedule('0 9 * * *', async () => {
     console.log('Scheduled task');
     // TODO
 });
