@@ -46,7 +46,7 @@ const products = [
         new ServiceTemplate("em-hrs-api", env => `http://em-hrs-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("em-npa", env => `http://em-npa-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("em-stitching", env => `http://em-stitching-${env}.service.core-compute-${env}.internal`),
-    ], false),
+    ], true),
     new Product("xui", "Expert UI", [
         new ServiceTemplate("xui-ao-webapp", env => prodOverride(env, `https://administer-orgs.platform.hmcts.net`, `https://administer-orgs.${env}.platform.hmcts.net`)),
         new ServiceTemplate("xui-mo-webapp", env => prodOverride(env, `https://manage-org.platform.hmcts.net`, `https://manage-org.${env}.platform.hmcts.net`)),
@@ -104,7 +104,7 @@ const products = [
         new ServiceTemplate("wa-task-management-api-java", env => `http://wa-task-management-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-task-monitor-java", env => `http://wa-task-monitor-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("wa-workflow-api-java", env => `http://wa-workflow-api-${env}.service.core-compute-${env}.internal`),
-    ], false)
+    ], true)
 ];
 
 const getAllProducts = () => products;
