@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/config": "3.3.5",
-    "jest": "30.1.3",
+    "jest": "30.2.0",
     "jest-extended": "6.0.0",
     "nodemon": "3.1.10"
   },
