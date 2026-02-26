@@ -36,8 +36,8 @@ const products = [
         new ServiceTemplate("ts-translation-service", env => `http://ts-translation-service-${env}.service.core-compute-${env}.internal`),
     ], true),
     new Product("cui", "CUI Reasonable Adjustments", [
-        new ServiceTemplate("cui-ra", env => `https://cui-ra.${env}.platform.hmcts.net`, [ Environment.AAT ]),
-    ], false),
+        new ServiceTemplate("cui-ra", env => `https://cui-ra.${env}.platform.hmcts.net`),
+    ], true),
     new Product("em", "Evidence Management", [
         new ServiceTemplate("dg-docassembly", env => `http://dg-docassembly-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("dm-store", env => `http://dm-store-${env}.service.core-compute-${env}.internal`),
@@ -86,11 +86,11 @@ const products = [
         new ServiceTemplate("lau-case-backend", env => `http://lau-case-backend-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("lau-frontend", env => prodOverride(env, `https://log-and-audit.platform.hmcts.net`, `https://lau.${env}.platform.hmcts.net`)),
         new ServiceTemplate("lau-idam-backend", env => `http://lau-idam-backend-${env}.service.core-compute-${env}.internal`),
-    ], false),
+    ], true),
     new Product("pcq", "Protected Characteristics Questionnaire", [
         new ServiceTemplate("pcq-backend", env => `http://pcq-backend-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("pcq-frontend", env => prodOverride(env, `https://equality-and-diversity.platform.hmcts.net`, `https://pcq.${env}.platform.hmcts.net`)),
-    ], false),
+    ], true),
     new Product("rd", "Reference Data", [
         new ServiceTemplate("rd-caseworker-ref-api", env => `http://rd-caseworker-ref-api-${env}.service.core-compute-${env}.internal`),
         new ServiceTemplate("rd-commondata-api", env => `http://rd-commondata-api-${env}.service.core-compute-${env}.internal`),
