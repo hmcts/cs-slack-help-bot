@@ -36,6 +36,7 @@ const products = [
         new ServiceTemplate("ts-translation-service", env => `http://ts-translation-service-${env}.service.core-compute-${env}.internal`),
     ], true),
     new Product("cui", "CUI Reasonable Adjustments", [
+        new ServiceTemplate(prodOverride(env, `https://manage-your-support-for-hmcts-services.service.gov.uk`, `https://cui-ra.${env}.platform.hmcts.net`)),
         new ServiceTemplate("cui-ra", env => `https://cui-ra.${env}.platform.hmcts.net`),
     ], true),
     new Product("em", "Evidence Management", [
