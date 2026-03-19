@@ -21,7 +21,7 @@
     "node-fetch-retry": "^2.0.1"
   },
   "devDependencies": {
-    "@types/config": "3.3.5",
+    "@types/config": "4.4.0",
     "jest": "30.3.0",
     "jest-extended": "7.0.0",
     "nodemon": "3.1.14"
