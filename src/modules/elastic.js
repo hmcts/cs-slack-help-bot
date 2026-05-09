@@ -1,7 +1,7 @@
 const { Client } = require('@elastic/elasticsearch')
 const config = require('config')
 
-const DLQ_INDEX = '.ccd-logstash-dead-letter';
+const DLQ_INDEX = 'ccd-logstash-dead-letter';
 
 const client = new Client({
     node: config.get('elastic.url')
